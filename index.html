@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTok配信過去問1-5</title>
+    <meta name="description" content="TikTok配信過去問1-5" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- favicon/web-clip-icon -->
+    <link rel="icon" href="favicon.ico" type="image/ico" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="webclip.png" />
+
+    <!-- ogp共有時の表示 -->
+    <meta property="og:site_name" content="TikTok配信過去問1-5" />
+    <meta property="og:url" content="http://127.0.0.1:5500/src/index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TikTok配信過去問1-5" />
+    <meta property="og:description" content="TikTok配信過去問1-5" />
+    <meta property="og:image" content="URL" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <meta property="fb:app_id" content="AppID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@twitter_id" />
+    <meta name="twitter:description" content="TikTok配信過去問1-5" />
+    <meta name="twitter:image:src" content="URL" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&family=Zen+Kurenaido&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- js -->
+    <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <!-- audio -->
+    <audio id="pipon" src="audio/pipopipon.mp3" preload="auto"></audio>
+    <audio id="bubuu" src="audio/bubuu.mp3" preload="auto"></audio>
+  </head>
+  <body class="js_body is-active">
+    <header class="l_header js_header">
+      <h1 class="l_header_logo">
+        <a href="https://mysterytop.netlify.app/" class="l_header_link"
+          >Dの謎べya/TikTok配信過去問1-5</a
+        >
+      </h1>
+      <nav class="l_header-nav js_nav">
+        <ul class="l_header-nav_list">
+          <li class="l_header-nav_item">
+            <a href="index.html" class="l_header-nav_link">はじめから</a>
+          </li>
+          <li class="l_header-nav_item">
+            <a href="https://mysterytop.netlify.app/" class="l_header-nav_link"
+              >Dの謎べya</a
+            >
+          </li>
+          <!-- <li class="l_header-nav_item">
+            <button class="l_header-nav_link" onclick="hint()">ヒント</button>
+          </li> -->
+        </ul>
+      </nav>
+      <button class="m_hamburger js_hamburger">
+        <span class="m_hamburger-bar"></span>
+        <span class="m_hamburger-bar"></span>
+        <span class="m_hamburger-bar"></span>
+      </button>
+    </header>
+    <div class="start">
+      <div class="l_contents l_container-sm">
+        <p>TikTok_LIVE配信で出題した謎が解ける💡</p>
+        <p>本作は、【謎1】～【謎5】です</p>
+        <p>※配信でしか解けないような謎は少し修正しています</p>
+        <br />
+        <p>
+          <button class="m_btn" onclick="openhint('example')">ヒント</button>
+          は、何度でも押せます。
+        </p>
+        <div class="js_hint" id="hintExample1">
+          <br />
+          <p>ヒント1</p>
+        </div>
+        <div class="js_hint" id="hintExample2">
+          <br />
+          <p>ヒント2</p>
+        </div>
+        <div class="js_hint" id="hintExample3">
+          <br />
+          <p>ヒント3</p>
+        </div>
+      </div>
+      <button class="m_btn" onclick="start('o')">謎を解く</button>
+      <p><br /></p>
+      <p>※Chromeでしか<br />動作確認してません！</p>
+      <!-- <p>※メンテナンス中です。動作がうまくいかない場合があります。</p> -->
+    </div>
+    <!-- 黒い全画面レイヤー -->
+    <div id="intro-overlay"></div>
+    <div id="fadeout-overlay"></div>
+    <main class="top_main">
+      <section id="section0" class="l_section js_section is-active">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo0');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo0" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo0P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <div class="js_hint" id="nazo0h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo0h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo0h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="section1" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo1');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo1" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo1P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <button class="m_btn" onclick="buckQuestion()">前の謎へ</button>
+          <div class="js_hint" id="nazo1h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo1h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo1h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="section2" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo2');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo2" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo2P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <button class="m_btn" onclick="buckQuestion()">前の謎へ</button>
+          <div class="js_hint" id="nazo2h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo2h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo2h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="section3" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo3');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo3" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo3P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <button class="m_btn" onclick="buckQuestion()">前の謎へ</button>
+          <div class="js_hint" id="nazo3h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo3h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo3h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="section4" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo4');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo4" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo4P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <button class="m_btn" onclick="buckQuestion()">前の謎へ</button>
+          <div class="js_hint" id="nazo4h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo4h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo4h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="section5" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <div>
+            <p class="m_question_p">あ</p>
+            <button
+              class="m_btn"
+              onclick="
+                openModal('nazo5');
+                openQuestion();
+              "
+            >
+              謎を開く
+            </button>
+            <!-- モーダル -->
+            <div id="nazo5" class="l_modal is-disable">
+              <div class="l_modal_content">
+                <span class="m_close-btn">&times;</span>
+                <p id="nazo5P">指定したコンテンツが入ります</p>
+              </div>
+            </div>
+          </div>
+          <button class="m_btn" onclick="openhint()">ヒント</button>
+          <button class="m_btn" onclick="passQuestion()">次の謎へ</button>
+          <button class="m_btn" onclick="buckQuestion()">前の謎へ</button>
+          <div class="js_hint" id="nazo5h1">
+            <p class="m_question_p">ヒント1</p>
+          </div>
+          <div class="js_hint" id="nazo5h2">
+            <p class="m_question_p">ヒント2</p>
+          </div>
+          <div class="js_hint" id="nazo5h3">
+            <p class="m_question_p">ヒント3</p>
+          </div>
+        </div>
+      </section>
+      <section id="goodEnd" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title m_red">Congratulations!</p>
+          <p class="m_question_p">
+            あ
+          </p>
+          <p class="m_question_p">
+            アンケート協力よろしく
+          </p>
+          <br /><br /><br />
+          <a
+            class="m_annke"
+            href="URLを貼る"
+            >アンケート回答<br /><br /><br
+          /></a>
+
+          <!-- <a href="explanation.html" class="m_annke">解説</a> -->
+        </div>
+      </section>
+      <section id="badEnd" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_question_p m_onryou_p"></p>
+
+          <br /><br /><br />
+          <a
+            class="m_annke m_onryou_p"
+            href="URLを貼る"
+            >アンケート回答<br /><br
+          /></a>
+          <!-- <a href="explanation.html" class="m_annke">解説</a> -->
+        </div>
+      </section>
+    </main>
+
+    <div class="l_container-sm">
+      <p>※上下グレーのヘッダー・フッターは、謎解きに使用しません。</p>
+    </div>
+    <footer class="l_footer">
+      <div class="l_footer_box">
+        <nav class="l_footer-nav">
+          <ul class="l_footer-nav_list">
+            <li class="l_footer-nav_item">
+              <a href="index.html" class="l_footer-nav_link">はじめから</a>
+            </li>
+            <!-- <li class="l_footer-nav_item">
+              <a href="room.html" class="l_footer-nav_link"
+                >部屋に入ってから</a
+              >
+            </li> -->
+            <!-- <li class="l_footer-nav_item">
+              <button class="l_footer-nav_link" onclick="hint()">ヒント</button>
+            </li> -->
+          </ul>
+        </nav>
+        <div class="l_footer_logo">
+          <a href="index.html" class="l_footer_link">
+            <img
+              src="img/logo.png"
+              alt=""
+              class="l_footer_link-img"
+              width="500"
+              height="500"
+            />
+          </a>
+        </div>
+      </div>
+      <p class="l_footer-copyright">
+        <small class="l_footer-copyright_txt">Dの謎べya</small>
+      </p>
+    </footer>
+  </body>
+</html>
