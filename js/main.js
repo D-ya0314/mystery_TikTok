@@ -40,8 +40,8 @@ async function initializeLiff() {
   } catch (error) {
     console.error("LIFF初期化または判定の失敗:", error);
     // エラーの生メッセージを画面に出して原因を特定する
-    document.getElementById("loading").innerText =
-      "エラー詳細: " + error.message;
+    document.getElementById("loading").innerHTML =
+      '<p class="m_section_title m_p_w">エラー詳細:' + error.message + "</p>";
   }
 }
 
@@ -137,8 +137,8 @@ async function checkUnlock(userId, DWMId) {
       // 未解放
       document.getElementById("errorContent").classList.remove("js_hidden");
 
-      document.getElementById("errorContent").innerText =
-        "このコンテンツはまだ解放されていません。";
+      document.getElementById("errorContent").innerHTML =
+        '<p class="m_section_title m_p_w">このコンテンツはまだ解放されていません。</p>';
     }
   } catch (error) {
     console.error("解放確認エラー:", error);
