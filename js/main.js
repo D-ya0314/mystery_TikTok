@@ -1,5 +1,140 @@
 "use strict";
 
+
+/*---------- あなたのLIFF IDを入力 ----------*/
+const MY_LIFF_ID = "2011066044-aC6gMP3A";
+let userId = sessionStorage.getItem("lineUserId");
+/*---------- ページ読み込み時のメイン処理 ----------*/
+async function initializeLiff() {
+  try {
+    // 1. LIFFの初期化
+    await liff.init({ liffId: MY_LIFF_ID });
+
+    // 2. LINEにログインしているかチェック（していなければログイン画面へ飛ばす）
+    if (!liff.isLoggedIn()) {
+      liff.login();
+      return;
+    }
+
+    // 3. ログイン中のユーザーデータ取得
+    // 固有のLINE IDを取得
+    const profile = await liff.getProfile();
+    userId = profile.userId;
+    sessionStorage.setItem("lineUserId", userId);
+    // LINE公式アカウントの友だち追加状況を取得
+    const friendship = await liff.getFriendship();
+    const isFriend = friendship.friendFlag;
+
+    // 4. 関数を呼び出して判定する
+    // メンバーシップ判定を行う
+    // const isMember = await checkMembershipStatus(userId);
+
+    // 5. ローディング画面（確認中...）を非表示にする
+    document.getElementById("loading").classList.add("js_hidden");
+
+    // 6. 判定結果によって画面の表示をコントロールする
+    // メンバーシップ
+    // display_mem(isMember);
+    // 公式追加
+    display_fri(isFriend, userId);
+  } catch (error) {
+    console.error("LIFF初期化または判定の失敗:", error);
+    // エラーの生メッセージを画面に出して原因を特定する
+    document.getElementById("loading").innerText =
+      "エラー詳細: " + error.message;
+  }
+}
+
+// 公式追加
+function display_fri(isFriend, userId) {
+  if (isFriend) {
+    // 友だち追加済みなら「謎」を表示
+    document.getElementById("premium-content").classList.remove("js_hidden");
+    // Googleスプレッドシートに記載
+    recordJoin(userId, "DWM_letter");
+  } else {
+    // 友だち追加していなければ拒否画面
+    document.getElementById("error-content").classList.remove("js_hidden");
+
+    // 「友だち追加する」ボタン
+    document.getElementById("add-line-btn").addEventListener("click", () => {
+      liff.openWindow({
+        url: "https://lin.ee/tseJ7Wa",
+        external: false,
+      });
+    });
+  }
+}
+
+/*---------- GAS ---------*/
+const GAS_URL =
+  "https://script.google.com/macros/s/AKfycbxTMJ8Pp5A_uCChoXaZSyRKt4vjkKmRz2oIrBkqfVxYxJYmzt9c_RWUGO-ibKHX20C9RQ/exec";
+// 開始
+async function recordJoin(userId, puzzleId) {
+  try {
+    const response = await fetch(GAS_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: userId,
+        puzzleId: puzzleId,
+        action: "join",
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log("参加記録:", data);
+  } catch (error) {
+    console.error("参加記録エラー:", error);
+  }
+}
+
+// クリア
+async function recordClear(userId, puzzleId) {
+  try {
+    const response = await fetch(GAS_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: userId,
+        puzzleId: puzzleId,
+        action: "clear",
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log("クリア記録:", data);
+  } catch (error) {
+    console.error("クリア記録エラー:", error);
+  }
+}
+
+/*---------- ページが読み込まれたら自動で実行させる ----------*/
+window.onload = initializeLiff;
+
+/*---------- アンケート ----------*/
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeRZubgbMQiowXNhsYiOzvkM4avclx2dVilwj5_Zn3dTxCpew/viewform?usp=dialog";
+const surveyBtn = document.getElementById("survey-btn");
+
+function openSurvey() {
+  const formUrl =
+    FORM_URL +
+    "?usp=pp_url" +
+    "&entry.655470745=" +
+    encodeURIComponent(userId) +
+    "&entry.1019551269=" +
+    encodeURIComponent("DWM_letter");
+
+  window.open(formUrl, "_blank");
+}
+if (surveyBtn) {
+  surveyBtn.addEventListener("click", () => {
+    openSurvey();
+  });
+}
+
+
 /*---------- ハンバーガーメニュー ----------*/
 const hamburger = document.querySelector(".js_hamburger");
 const navigation = document.querySelector(".js_nav");
@@ -167,7 +302,7 @@ function start(n) {
 const puzzles = [
   {
     question:
-      "<p class=\"m_question_p\">問題文0</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
+      "<p class=\"m_question_p\">作成未完成</p><p class=\"m_question_p\">お楽しみに</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
     answer: "答え0",
   },
   {
@@ -177,23 +312,23 @@ const puzzles = [
   },
   {
     question:
-      "<div class='l_img-box'><img src='img/TikTok_謎2.png' alt='謎1' class='m_img' width='500' height='500'></div><p class=\"m_question_p\">問題文2</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer: "答え2",
+      "<div class='l_img-box'><img src='img/TikTok_謎2.png' alt='謎1' class='m_img' width='500' height='500'></div><p class=\"m_question_p\">？を答えよ</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
+    answer: "みるく",
   },
   {
     question:
-      "<div class='l_img-box'><img src='img/TikTok_謎3.png' alt='謎1' class='m_img' width='500' height='500'></div><p class=\"m_question_p\">問題文3</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer: "答え3",
+      "<div class='l_img-box'><img src='img/TikTok_謎3.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
+    answer:  ["24", "２４"],
   },
   {
     question:
-      "<div class='l_img-box'><img src='img/TikTok_謎4.png' alt='謎1' class='m_img' width='500' height='500'></div><p class=\"m_question_p\">問題文4</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
+      "<div class='l_img-box'><img src='img/TikTok_謎4.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
     answer: "答え4",
   },
   {
     question:
-      "<div class='l_img-box'><img src='img/TikTok_謎5.png' alt='謎1' class='m_img' width='500' height='500'></div><p class=\"m_question_p\">問題文4</p> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer: "答え5",
+      "<div class='l_img-box'><img src='img/TikTok_謎5.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
+    answer:  ["6", "６"],
   },
 ];
 

@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <!-- js -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="js/main.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
@@ -51,19 +52,12 @@
   <body class="js_body is-active">
     <header class="l_header js_header">
       <h1 class="l_header_logo">
-        <a href="https://mysterytop.netlify.app/" class="l_header_link"
-          >Dの謎べya/TikTok配信過去問1-5</a
-        >
+        <p class="l_header_link">TikTok配信過去問1-5</p>
       </h1>
       <nav class="l_header-nav js_nav">
         <ul class="l_header-nav_list">
           <li class="l_header-nav_item">
             <a href="index.html" class="l_header-nav_link">はじめから</a>
-          </li>
-          <li class="l_header-nav_item">
-            <a href="https://mysterytop.netlify.app/" class="l_header-nav_link"
-              >Dの謎べya</a
-            >
           </li>
           <!-- <li class="l_header-nav_item">
             <button class="l_header-nav_link" onclick="hint()">ヒント</button>
@@ -76,7 +70,18 @@
         <span class="m_hamburger-bar"></span>
       </button>
     </header>
-    <div class="start">
+
+    <!-- ローディング画面 -->
+    <div id="loading" class="l_contents l_container-sm">
+      <p>LINEログイン確認中...</p>
+    </div>
+    <!-- 拒否画面 -->
+    <div id="error-content" class="js_hidden l_contents l_container-sm">
+      <p>この謎に挑戦するには、LINE公式アカウントの友だち追加が必要です。</p>
+
+      <button id="add-line-btn" class="m_answer_btn">友だち追加する</button>
+    </div>
+    <div id="premium-content" class="start js_hidden">
       <div class="l_contents l_container-sm">
         <p>TikTok_LIVE配信で出題した謎が解ける💡</p>
         <p>本作は、【謎1】～【謎5】です</p>
@@ -111,7 +116,7 @@
       <section id="section0" class="l_section js_section is-active">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">まずは配信で出題していない特別謎</p>
             <button
               class="m_btn"
               onclick="
@@ -145,7 +150,7 @@
       <section id="section1" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">謎１</p>
             <button
               class="m_btn"
               onclick="
@@ -180,7 +185,7 @@
       <section id="section2" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">謎２</p>
             <button
               class="m_btn"
               onclick="
@@ -215,7 +220,7 @@
       <section id="section3" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">謎３</p>
             <button
               class="m_btn"
               onclick="
@@ -250,7 +255,7 @@
       <section id="section4" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">謎4</p>
             <button
               class="m_btn"
               onclick="
@@ -285,7 +290,7 @@
       <section id="section5" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <div>
-            <p class="m_question_p">あ</p>
+            <p class="m_question_p">謎5</p>
             <button
               class="m_btn"
               onclick="
@@ -320,18 +325,9 @@
       <section id="goodEnd" class="l_section js_section">
         <div class="l_contents l_container-sm">
           <p class="m_section_title m_red">Congratulations!</p>
-          <p class="m_question_p">
-            あ
-          </p>
-          <p class="m_question_p">
-            アンケート協力よろしく
-          </p>
+          <p class="m_question_p">アンケート協力よろしく</p>
           <br /><br /><br />
-          <a
-            class="m_annke"
-            href="URLを貼る"
-            >アンケート回答<br /><br /><br
-          /></a>
+          <button id="survey-btn" class="m_btn">アンケートに答える</button>
 
           <!-- <a href="explanation.html" class="m_annke">解説</a> -->
         </div>
@@ -341,11 +337,7 @@
           <p class="m_question_p m_onryou_p"></p>
 
           <br /><br /><br />
-          <a
-            class="m_annke m_onryou_p"
-            href="URLを貼る"
-            >アンケート回答<br /><br
-          /></a>
+          <button id="survey-btn" class="m_btn">アンケートに答える</button>
           <!-- <a href="explanation.html" class="m_annke">解説</a> -->
         </div>
       </section>
@@ -384,7 +376,7 @@
         </div>
       </div>
       <p class="l_footer-copyright">
-        <small class="l_footer-copyright_txt">Dの謎べya</small>
+        <small class="l_footer-copyright_txt">Dの謎部屋</small>
       </p>
     </footer>
   </body>
