@@ -28,10 +28,9 @@ async function initializeLiff() {
     // 4. 関数を呼び出して判定する
     // メンバーシップ判定を行う
     // const isMember = await checkMembershipStatus(userId);
-
-    // 5. ローディング画面（確認中...）を非表示にする
-    document.getElementById("loading").classList.add("js_hidden");
-
+    // ローディング画面（確認中...）を非表示にする
+   
+    
     // 6. 判定結果によって画面の表示をコントロールする
     // メンバーシップ
     // display_mem(isMember);
@@ -51,6 +50,7 @@ function display_fri(isFriend, userId) {
     checkUnlock(userId, DWMId);
   } else {
     // 友だち追加していなければ拒否画面
+    document.getElementById("loading").classList.add("js_hidden");
     document.getElementById("errorContent").classList.remove("js_hidden");
 
     // 「友だち追加する」ボタン
@@ -135,6 +135,7 @@ async function checkUnlock(userId, DWMId) {
       recordJoin(userId, DWMId);
     } else {
       // 未解放
+      document.getElementById("loading").classList.add("js_hidden");
       document.getElementById("errorContent").classList.remove("js_hidden");
 
       document.getElementById("errorContent").innerHTML =
