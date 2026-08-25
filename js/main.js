@@ -3,6 +3,7 @@
 /*---------- あなたのLIFF IDを入力 ----------*/
 const MY_LIFF_ID = "2011066044-aC6gMP3A";
 let userId = sessionStorage.getItem("lineUserId");
+let DWMId = "DWM_TikTok1-5";
 /*---------- ページ読み込み時のメイン処理 ----------*/
 async function initializeLiff() {
   try {
@@ -50,7 +51,7 @@ function display_fri(isFriend, userId) {
     // 友だち追加済みなら「謎」を表示
     document.getElementById("premium-content").classList.remove("js_hidden");
     // Googleスプレッドシートに記載
-    recordJoin(userId, "DWM_TikTok1-5");
+    recordJoin(userId, DWMId);
   } else {
     // 友だち追加していなければ拒否画面
     document.getElementById("error-content").classList.remove("js_hidden");
@@ -123,7 +124,7 @@ function openSurvey() {
     "&entry.655470745=" +
     encodeURIComponent(userId) +
     "&entry.1019551269=" +
-    encodeURIComponent("DWM_TikTok1-5");
+    encodeURIComponent(DWMId);
 
   window.open(formUrl, "_blank");
 }
@@ -446,6 +447,7 @@ function submitAnswer() {
       input = "";
       // 次のセクションへ
       document.getElementById("section5").classList.remove("is-active");
+      recordClear(userId, DWMId);
       document.getElementById("goodEnd").classList.add("is-active");
       hints.forEach((hint) => {
         hint.classList.remove("is-active");
