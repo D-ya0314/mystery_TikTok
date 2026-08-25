@@ -1,6 +1,5 @@
 "use strict";
 
-
 /*---------- あなたのLIFF IDを入力 ----------*/
 const MY_LIFF_ID = "2011066044-aC6gMP3A";
 let userId = sessionStorage.getItem("lineUserId");
@@ -51,7 +50,7 @@ function display_fri(isFriend, userId) {
     // 友だち追加済みなら「謎」を表示
     document.getElementById("premium-content").classList.remove("js_hidden");
     // Googleスプレッドシートに記載
-    recordJoin(userId, "DWM_letter");
+    recordJoin(userId, "DWM_TikTok1-5");
   } else {
     // 友だち追加していなければ拒否画面
     document.getElementById("error-content").classList.remove("js_hidden");
@@ -124,7 +123,7 @@ function openSurvey() {
     "&entry.655470745=" +
     encodeURIComponent(userId) +
     "&entry.1019551269=" +
-    encodeURIComponent("DWM_letter");
+    encodeURIComponent("DWM_TikTok1-5");
 
   window.open(formUrl, "_blank");
 }
@@ -133,7 +132,6 @@ if (surveyBtn) {
     openSurvey();
   });
 }
-
 
 /*---------- ハンバーガーメニュー ----------*/
 const hamburger = document.querySelector(".js_hamburger");
@@ -318,7 +316,7 @@ const puzzles = [
   {
     question:
       "<div class='l_img-box'><img src='img/TikTok_謎3.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer:  ["24", "２４"],
+    answer: ["24", "２４"],
   },
   {
     question:
@@ -328,7 +326,7 @@ const puzzles = [
   {
     question:
       "<div class='l_img-box'><img src='img/TikTok_謎5.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer:  ["6", "６"],
+    answer: ["6", "６"],
   },
 ];
 
