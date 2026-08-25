@@ -51,10 +51,10 @@ function display_fri(isFriend, userId) {
     checkUnlock(userId, DWMId);
   } else {
     // 友だち追加していなければ拒否画面
-    document.getElementById("error-content").classList.remove("js_hidden");
+    document.getElementById("errorContent").classList.remove("js_hidden");
 
     // 「友だち追加する」ボタン
-    document.getElementById("add-line-btn").addEventListener("click", () => {
+    document.getElementById("addLineBtn").addEventListener("click", () => {
       liff.openWindow({
         url: "https://lin.ee/tseJ7Wa",
         external: false,
@@ -129,14 +129,15 @@ async function checkUnlock(userId, DWMId) {
 
     if (data.unlocked) {
       // 解放済み
-      document.getElementById("premium-content").classList.remove("js_hidden");
+      document.getElementById("sectionCheck").classList.add("js_hidden");
+      document.getElementById("premiumContent").classList.remove("js_hidden");
 
       recordJoin(userId, DWMId);
     } else {
       // 未解放
-      document.getElementById("error-content").classList.remove("js_hidden");
+      document.getElementById("errorContent").classList.remove("js_hidden");
 
-      document.getElementById("error-content").innerText =
+      document.getElementById("errorContent").innerText =
         "このコンテンツはまだ解放されていません。";
     }
   } catch (error) {
