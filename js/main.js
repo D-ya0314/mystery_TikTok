@@ -48,10 +48,7 @@ async function initializeLiff() {
 // 公式追加
 function display_fri(isFriend, userId) {
   if (isFriend) {
-    // 友だち追加済みなら「謎」を表示
-    document.getElementById("premium-content").classList.remove("js_hidden");
-    // Googleスプレッドシートに記載
-    recordJoin(userId, DWMId);
+    checkUnlock(userId, DWMId);
   } else {
     // 友だち追加していなければ拒否画面
     document.getElementById("error-content").classList.remove("js_hidden");
@@ -106,6 +103,44 @@ async function recordClear(userId, puzzleId) {
     console.log("クリア記録:", data);
   } catch (error) {
     console.error("クリア記録エラー:", error);
+  }
+}
+
+// 解放条件確認
+async function checkUnlock(userId, DWMId) {
+  try {
+    const response = await fetch(GAS_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: userId,
+        DWMId: DWMId,
+        action: "checkUnlock",
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log("解放確認:", data);
+
+    if (!data.success) {
+      console.error("解放確認エラー:", data.message);
+      return;
+    }
+
+    if (data.unlocked) {
+      // 解放済み
+      document.getElementById("premium-content").classList.remove("js_hidden");
+
+      recordJoin(userId, DWMId);
+    } else {
+      // 未解放
+      document.getElementById("error-content").classList.remove("js_hidden");
+
+      document.getElementById("error-content").innerText =
+        "このコンテンツはまだ解放されていません。";
+    }
+  } catch (error) {
+    console.error("解放確認エラー:", error);
   }
 }
 
