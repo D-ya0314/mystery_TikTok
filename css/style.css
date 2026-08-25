@@ -93,6 +93,8 @@ body {
   height: 50vh;
 }
 
+#loading,
+#error-content,
 #section0,
 #section1,
 #section2,
