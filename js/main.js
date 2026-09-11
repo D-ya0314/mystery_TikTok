@@ -29,8 +29,7 @@ async function initializeLiff() {
     // メンバーシップ判定を行う
     // const isMember = await checkMembershipStatus(userId);
     // ローディング画面（確認中...）を非表示にする
-   
-    
+
     // 6. 判定結果によって画面の表示をコントロールする
     // メンバーシップ
     // display_mem(isMember);
@@ -359,7 +358,7 @@ const puzzles = [
   {
     question:
       "<div class='l_img-box'><img src='img/TikTok_謎4.png' alt='謎1' class='m_img' width='500' height='500'></div> <input type='text' id='answer' class='m_answer' placeholder='答えを入力' /> <button class='m_btn' id='solveBtn' onclick=\"submitAnswer()\"> 回答 </button> <p id='result'class class='m_question_p'></p>",
-    answer: "答え4",
+    answer: "反省してます",
   },
   {
     question:
@@ -585,6 +584,7 @@ function openhint() {
     const hint1 = document.getElementById("nazo3h1");
     const hint2 = document.getElementById("nazo3h2");
     const hint3 = document.getElementById("nazo3h3");
+    const hint4 = document.getElementById("nazo3h4");
     if (hintCount === 0) {
       hint1.classList.toggle("is-active");
       hintCount = 1;
@@ -595,9 +595,13 @@ function openhint() {
       hint3.classList.toggle("is-active");
       hintCount = 3;
     } else if (hintCount === 3) {
+      hint3.classList.toggle("is-active");
+      hintCount = 4;
+    } else if (hintCount === 4) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
+      hint4.classList.toggle("is-active");
       hintCount = 0;
     }
   } else if (currentPuzzle === 4) {
