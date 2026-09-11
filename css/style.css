@@ -107,6 +107,9 @@ body {
   background: url("../img/back_nazo4.png") no-repeat center center;
   background-size: cover;
   min-height: 90vh;
+  @media screen and (min-width: 1080px) {
+    min-height: 120vh;
+  }
 }
 #goodEnd {
   background: url("../img/back.png") no-repeat center center;
